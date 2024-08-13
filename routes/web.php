@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CreatePostinganController;
 
 Route::get('/', function () {
@@ -17,5 +18,6 @@ Route::get('/lihatpostingan', [App\Http\Controllers\LihatPostinganController::cl
 Route::get('/explore', [App\Http\Controllers\LihatPostinganController::class, 'explore'])->name('explore');
 Route::get('/edit', [App\Http\Controllers\EditController::class, 'edit'])->name('edit');
 Route::post('/addpost', [PostController::class, 'addpost'])->name('addpost');
+Route::post('/addcomment', [CommentController::class, 'addcomment'])->name('addcomment');
 
 Route::get('delete/{id}', [PostController::class, 'delete'])->name('delete');

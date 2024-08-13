@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class LihatPostinganController extends Controller
 {
     public function index() {
-        $posts = Post::latest()->get();
+        $posts = Post::with('comments')->latest()->get();
         return view('lihatpostingan', compact('posts'));
     }
 

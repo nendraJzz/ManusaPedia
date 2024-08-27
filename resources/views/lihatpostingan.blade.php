@@ -7,9 +7,9 @@
             <div class="col-md-4">
                 <div class="mt-4">
                     <div class="card" >
-                        <div class="card-header fw-bold d-flex justify-content-between align-items-center">{{ Auth::user()->name }} <i class="bi bi-three-dots-vertical" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#opsi"></i></div>
+                        <div class="card-header fw-bold d-flex justify-content-between align-items-center">{{ Auth::user()->name }} <i class="bi bi-three-dots-vertical" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#opsi{{ $post->id }}"></i></div>
                         <!-- Modal -->
-                        <div class="modal fade" id="opsi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="opsi{{ $post->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -17,13 +17,22 @@
                                 </div>
                                 <div class="modal-body d-flex flex-column align-items-center">
                                     <a href="delete/{{ $post->id }}" style="text-decoration: none;" class="font-medium text-danger hover:underline ">Delete</a>
-                                    <a href="/edit"  style="text-decoration: none;" class="font-medium text-black hover:underline" >Sunting</a>
+                                    <a href="/edit/{{ $post->id }}"  style="text-decoration: none;" class="font-medium text-black hover:underline" >Sunting</a>
                                 </div>
                             </div>
                             </div>
                         </div>
-  
-                        <img src="{{ asset($post->image) }}" alt="" style="object-fit: cover; width: 100%; height: 300px;">
+
+                        @if($post->image)
+                            @if(Str::contains($post->image, ['.mp4', '.m4v']))
+                                <video src="{{ asset($post->image) }}" class="card-img-top" controls style="object-fit: cover; width: 100%; height: 300px;">
+                                </video>
+                            @else
+                                <img src="{{ asset($post->image) }}" class="card-img-top" alt="..." style="object-fit: cover; width: 100%; height: 300px;">
+                            @endif
+                        @endif
+
+
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <div style="cursor: pointer;">
@@ -76,9 +85,9 @@
                         
                         <div class="modal-body">
                         @foreach ($post->comments as $item)
-                        <div class="border-bottom">
+                        <div class="border-bottom pt-3">
                             
-                            <span class="fw-bold">{{ $item->nama }}</span>
+                            <span class="fw-bold">{{ $item->nama }} </span>
                             <br>
                             <span class="">{{ $item->comment }}</span>
                             

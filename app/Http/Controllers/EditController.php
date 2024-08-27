@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class EditController extends Controller
 {
-    public function edit(){
-        $data = Post::all();
+    public function edit($id){
+        $data = Post::find($id);
         return view('edit', compact('data'));
     }
 }

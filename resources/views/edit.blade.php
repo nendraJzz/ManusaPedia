@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container">
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center pt-5">
             <div class="col-md-3">
-                <form method="POST" action="/updatedata/{{ $data->id }}">
+                <form method="POST" action="/updatedata/{{ $data->id }}" enctype="multipart/form-data">
                 @csrf
                 <h1>Edit Postingan</h1>
                 <div class="mb-3">
